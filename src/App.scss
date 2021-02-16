@@ -1,0 +1,406 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&family=Roboto+Slab:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap');
+
+$black: hsl(234, 39%, 14%);
+$gray: hsl(235, 35, 18%);
+$white: hsl(0, 0, 100%);
+$white2: hsl(227, 100, 92%);
+$white3: hsl(229, 52, 96%);
+
+$style1: hsl(0, 91, 71%);
+$style2: hsl(182, 91, 71%);
+$style3: hsl(284, 89, 74%);
+
+@mixin h1 {
+	font-weight: bold;
+	font-size: 100px;
+	line-height: 120px;
+	letter-spacing: -5px;
+	font-family: 'Kumbh Sans', sans-serif;
+}
+
+@mixin h2 {
+	font-weight: bold;
+	font-size: 28px;
+	line-height: 34px;
+}
+
+@mixin h3 {
+	font-weight: bold;
+	font-size: 1rem;
+	line-height: 19px;
+	letter-spacing: 15px;
+	text-transform: uppercase;
+}
+
+@mixin h4 {
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 16px;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+}
+
+@mixin body1 {
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+@mixin body2 {
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 14px;
+}
+
+@mixin outline {
+	position: relative;
+	border: 1px solid hsla(0, 0, 0%, 0);
+	min-height: 50px;
+	min-width: 50px;
+	border-radius: 50%;
+}
+
+* {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	vertical-align: baseline;
+	font-size: 100%;
+}
+
+html {
+	-webkit-tap-highlight-color: transparent;
+}
+
+.Container {
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: $gray;
+}
+
+.Mode {
+	width: 373px;
+	height: 63px;
+	border-radius: 31.5px;
+	background-color: $black;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	z-index: 5;
+	p {
+		@include body1;
+		padding: 15px 0;
+		width: 120px;
+		border-radius: 26.5px;
+		text-align: center;
+		cursor: pointer;
+		user-select: none;
+		transition: color 0.5s ease;
+		&:hover {
+			color: $white2 !important;
+		}
+	}
+}
+
+.Clock {
+	height: 410px;
+	width: 410px;
+	border-radius: 50%;
+	position: relative;
+	color: $white2;
+	background-color: $black;
+	box-shadow: 50px 50px 100px #121530, -50px -50px 100px #272c5a;
+	z-index: 1;
+	overflow: hidden;
+	.OuterRing {
+		min-height: 366px;
+		min-width: 366px;
+		border-radius: 50%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		background-color: #161932;
+		box-shadow: 50px 50px 100px #272c5a, -50px -50px 100px #121530;
+		.Ring {
+			height: 340px;
+			width: 340px;
+			border-radius: 50%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 3;
+			.Circle {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				stroke-dasharray: 301;
+				z-index: 4;
+				transition: all 1s linear;
+			}
+		}
+		.Units {
+			min-height: 310px;
+			width: 310px;
+			border-radius: 50%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: $black;
+			outline-style: none;
+			outline: none;
+			h1 {
+				@include h1;
+				user-select: none;
+			}
+			h3 {
+				@include h3;
+				margin-left: 25px;
+				cursor: pointer;
+				user-select: none;
+				transition: color 0.5s ease;
+				&:hover {
+					color: hsla(226, 100%, 92%, 0.4);
+				}
+			}
+		}
+	}
+}
+
+.SettingsIcon {
+	cursor: pointer;
+	&:hover {
+		path {
+			transition: opacity 0.5s ease;
+			opacity: 1;
+		}
+	}
+}
+
+.Settings {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	min-height: 464px;
+	min-width: 540px;
+	border-radius: 25px;
+	background-color: $white;
+	z-index: 6;
+	display: flex;
+	flex-direction: column;
+	h2 {
+		@include h2;
+		padding: 34px 0 0 40px;
+		border-bottom: 1px solid hsl(0, 2, 89%);
+		font-family: 'Kumbh Sans', sans-serif;
+		user-select: none;
+	}
+	h4 {
+		@include h4;
+		font-family: 'Kumbh Sans', sans-serif;
+		user-select: none;
+	}
+	.Close {
+		position: absolute;
+		top: 25px;
+		right: 40px;
+		cursor: pointer;
+		&:hover {
+			path {
+				opacity: 1;
+			}
+		}
+	}
+	.Time {
+		display: flex;
+		flex-direction: column;
+		max-width: 462px;
+		min-height: 109px;
+		max-height: 109px;
+		margin: 24px 0 25px 40px;
+		.TimeChange {
+			margin-top: 22px;
+			min-width: 462px;
+			display: flex;
+			justify-content: space-between;
+			p {
+				@include body2;
+				color: hsla(235, 35, 18%, 0.4);
+				user-select: none;
+				font-family: 'Kumbh Sans', sans-serif;
+				min-height: 12px;
+				min-width: 140px;
+				margin-bottom: 8px;
+			}
+		}
+		.InputList {
+			min-width: 462px;
+			display: flex;
+			justify-content: space-between;
+			.Input {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				min-height: 48px;
+				min-width: 140px;
+				background-color: $white3;
+				border-radius: 10px;
+				p {
+					color: hsl(235, 35, 18);
+					margin-left: 16px;
+					user-select: none;
+					font-family: 'Kumbh Sans', sans-serif;
+				}
+				.Arrows {
+					display: flex;
+					flex-direction: column;
+					margin-right: 16px;
+					.ArrowUp,
+					.ArrowDown {
+						padding-top: 4px;
+						min-height: 1rem;
+						cursor: pointer;
+						&:hover {
+							path {
+								stroke: $black;
+								stroke-opacity: 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.Font {
+		max-width: 462px;
+		min-height: 40px;
+		padding: 24px 0;
+		margin-left: 40px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-top: 1px solid hsl(0, 2, 89%);
+		border-bottom: 1px solid hsl(0, 2, 89%);
+		.FontChange {
+			min-height: 40px;
+			min-width: 152px;
+			display: flex;
+			justify-content: space-between;
+			.Outline {
+				@include outline;
+				p {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					cursor: pointer;
+					vertical-align: middle;
+					text-align: center;
+					min-height: 40px;
+					line-height: 40px;
+					min-width: 40px;
+					border-radius: 50%;
+					background-color: $white3;
+					color: hsla(235, 35, 18%, 0.7297);
+					user-select: none;
+				}
+				&:first-child {
+					font-family: 'Kumbh Sans', sans-serif;
+				}
+				&:nth-child(2) {
+					font-family: 'Roboto Slab', serif;
+				}
+				&:nth-child(3) {
+					font-family: 'Space Mono', monospace;
+				}
+				&:hover {
+					border: 1px solid $white3;
+				}
+				.FontActive {
+					background-color: hsl(234, 39, 14);
+					color: hsl(0, 0, 100%);
+				}
+			}
+		}
+	}
+	.Color {
+		max-width: 462px;
+		min-height: 40px;
+		align-items: center;
+		margin: 25px 0 0 40px;
+		display: flex;
+		justify-content: space-between;
+		.ColorChange {
+			min-height: 40px;
+			min-width: 152px;
+			display: flex;
+			justify-content: space-between;
+			.Outline {
+				@include outline;
+				p {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					cursor: pointer;
+					vertical-align: middle;
+					text-align: center;
+					min-height: 40px;
+					line-height: 40px;
+					min-width: 40px;
+					border-radius: 50%;
+					user-select: none;
+				}
+				.Check1 {
+					background-color: $style1;
+				}
+				.Check2 {
+					background-color: $style2;
+				}
+				.Check3 {
+					background-color: $style3;
+				}
+				&:hover {
+					border: 1px solid $white3;
+				}
+			}
+		}
+	}
+	button {
+		font-size: 16px;
+		font-weight: bold;
+		position: absolute;
+		left: 50%;
+		bottom: -25px;
+		transform: translateX(-50%);
+		min-width: 140px;
+		min-height: 53px;
+		background-color: $style1;
+		color: $white;
+		border-radius: 26.5px;
+		cursor: pointer;
+		font-family: 'Kumbh Sans', sans-serif;
+		user-select: none;
+		&:hover {
+			background-color: hsl(0, 91, 81%);
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+}
