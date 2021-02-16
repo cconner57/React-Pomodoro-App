@@ -163,6 +163,11 @@ html {
 			background-color: $black;
 			outline-style: none;
 			outline: none;
+			cursor: pointer;
+			transition: color 0.5s ease;
+			&:hover {
+				color: hsla(226, 100%, 92%, 0.4);
+			}
 			h1 {
 				@include h1;
 				user-select: none;
@@ -170,12 +175,7 @@ html {
 			h3 {
 				@include h3;
 				margin-left: 25px;
-				cursor: pointer;
 				user-select: none;
-				transition: color 0.5s ease;
-				&:hover {
-					color: hsla(226, 100%, 92%, 0.4);
-				}
 			}
 		}
 	}

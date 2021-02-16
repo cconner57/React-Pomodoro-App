@@ -22,7 +22,12 @@ const Clock = ({ userSettings, setUserSettings }) => {
 			} else if (event === 'pause') {
 				setUserSettings({ ...userSettings, active: false, paused: true });
 			} else if (event === 'resume') {
-				setUserSettings({ ...userSettings, active: true, paused: false });
+				setUserSettings({
+					...userSettings,
+					active: true,
+					paused: false,
+					finished: false,
+				});
 			} else if (event === 'stop') {
 				setUserSettings({
 					...userSettings,
@@ -39,10 +44,6 @@ const Clock = ({ userSettings, setUserSettings }) => {
 	const playAlert = useCallback(() => {
 		timerAlert.current.play();
 	}, []);
-
-	useEffect(() => {
-		setMinutes(userSettings[userSettings.mode]);
-	}, [userSettings]);
 
 	useEffect(() => {
 		if (!active && !paused) {
@@ -109,14 +110,24 @@ const Clock = ({ userSettings, setUserSettings }) => {
 						strokeLinecap='round'
 					/>
 				</svg>
-				<div className='Units'>
+				<div
+					className='Units'
+					onClick={
+						finished
+							? () => timer('start')
+							: active && !paused
+							? () => timer('pause')
+							: !active && !finished && !paused
+							? () => timer('start')
+							: !active && paused
+							? () => timer('resume')
+							: null
+					}>
 					<h1 style={{ fontFamily: font }}>{`${minutes}:${seconds}`}</h1>
-					{finished && <h3 onClick={() => timer('start')}>Restart</h3>}
-					{active && !paused && <h3 onClick={() => timer('pause')}>Pause</h3>}
-					{!active && !finished && !paused && (
-						<h3 onClick={() => timer('start')}>Start</h3>
-					)}
-					{!active && paused && <h3 onClick={() => timer('resume')}>Resume</h3>}
+					{finished && <h3>Restart</h3>}
+					{active && !paused && <h3>Pause</h3>}
+					{!active && !finished && !paused && <h3>Start</h3>}
+					{!active && paused && <h3>Resume</h3>}
 				</div>
 			</div>
 			<audio ref={timerAlert} src={soundfile} type='audio' />
